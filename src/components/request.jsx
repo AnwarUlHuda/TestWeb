@@ -69,13 +69,13 @@ const Requests = () => {
             <div className="flex gap-[10px]">
               <button
                 className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", request._id)}
+                onClick={() => reviewRequest("rejected", _id)}
               >
                 Reject
               </button>
               <button
                 className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", request._id)}
+                onClick={() => reviewRequest("accepted", _id)}
               >
                 Accept
               </button>
