@@ -44,7 +44,7 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center my-10 w-2/3 m-auto">
         <div className="flex justify-center mx-10">
           <div className="card bg-base-300 w-96 shadow-xl">
             <div className="card-body">
@@ -128,6 +128,7 @@ const EditProfile = ({ user }) => {
         </div>
         <UserCard
           user={{ firstName, lastName, photoUrl, age, gender, about }}
+          viewOnly
         />
       </div>
       {showToast && (

@@ -39,7 +39,7 @@ const Login = () => {
         { firstName, lastName, emailId, password },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data.data));
+      dispatch(addUser(res.data));
       return navigate("/profile");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
@@ -47,13 +47,13 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-[20px]">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
           <h2 className="card-title justify-center">
             {isLoginForm ? "Login" : "Sign Up"}
           </h2>
-          <div>
+          <div className="pr-[20px]">
             {!isLoginForm && (
               <>
                 <label className="form-control w-full max-w-xs my-2">
@@ -114,8 +114,12 @@ const Login = () => {
           </div>
 
           <p
-            className="m-auto cursor-pointer py-2"
-            onClick={() => setIsLoginForm((value) => !value)}
+            className="m-auto cursor-pointer py-4"
+            onClick={() => {
+              setIsLoginForm((value) => !value);
+              setError('');
+            }
+            }
           >
             {isLoginForm
               ? "New User? Signup Here"

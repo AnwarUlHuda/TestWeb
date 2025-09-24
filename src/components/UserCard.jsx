@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
 import React from "react";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, viewOnly=false }) => {
   const { _id, firstName, lastName, photoUrl, age, gender, about } = user;
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const UserCard = ({ user }) => {
   };
 
   return (
-    <div className="card bg-base-300 w-96 shadow-xl">
+    <div style={{pointerEvents:viewOnly?"none":'auto'}}className="card bg-base-300 w-96 shadow-xl">
       <figure>
         <img src={user.photoUrl} alt="photo" />
       </figure>

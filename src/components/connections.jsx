@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addConnections } from "../utils/connectionSlice";
+import React from "react";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections);
@@ -13,7 +14,7 @@ const Connections = () => {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
-      dispatch(addConnections(res.data.data));
+      dispatch(addConnections(res.data));
     } catch (err) {
       // Handle Error Case
       console.error(err);
@@ -26,7 +27,7 @@ const Connections = () => {
 
   if (!connections) return;
 
-  if (connections.length === 0) return <h1> No Connections Found</h1>;
+  if (connections.length === 0) return <h1 className="text-center"> No Connections Found</h1>;
 
   return (
     <div className="text-center my-10">
@@ -39,7 +40,7 @@ const Connections = () => {
         return (
           <div
             key={_id}
-            className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
+            className="flex justify-around items-center bg-base-300 w-1/2 mx-auto"
           >
             <div>
               <img

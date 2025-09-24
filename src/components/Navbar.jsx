@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import React from "react";
+import { emptyFeed } from "../utils/feedSlice";
+import { removeConnections } from "../utils/connectionSlice";
+import { emptyRequest } from "../utils/requestSlice";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -14,6 +17,9 @@ const NavBar = () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
+      dispatch(emptyFeed());
+      dispatch(removeConnections());
+      dispatch(emptyRequest());
       return navigate("/login");
     } catch (err) {
       // Error logic maybe redirect to error page
@@ -22,15 +28,15 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar w-auto bg-base-300">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl">
           👩‍💻 DevTinder
         </Link>
       </div>
       {user && (
-        <div className="flex-none gap-2">
-          <div className="form-control">Welcome, {user.firstName}</div>
+        <div className="flex gap-[10px] items-center justify-between">
+          <div>Welcome, {user.firstName + " " + user.lastName}</div>
           <div className="dropdown dropdown-end mx-5 flex">
             <div
               tabIndex={0}

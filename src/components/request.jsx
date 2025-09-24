@@ -3,9 +3,10 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
 import { useEffect, useState } from "react";
+import React from "react";
 
 const Requests = () => {
-  const requests = useSelector((store) => store.requests);
+  const requests = useSelector((store) => store.request);
   const dispatch = useDispatch();
 
   const reviewRequest = async (status, _id) => {
@@ -21,11 +22,11 @@ const Requests = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/requests/received", {
+      const res = await axios.get(BASE_URL + "/user/requests", {
         withCredentials: true,
       });
 
-      dispatch(addRequests(res.data.data));
+      dispatch(addRequests(res.data.data || []));
     } catch (err) {}
   };
 
@@ -44,12 +45,12 @@ const Requests = () => {
 
       {requests.map((request) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
-          request.fromUserId;
+          request;
 
         return (
           <div
             key={_id}
-            className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto"
+            className=" flex w-1/2 justify-around items-center bg-base-300 mx-auto"
           >
             <div>
               <img
@@ -65,7 +66,7 @@ const Requests = () => {
               {age && gender && <p>{age + ", " + gender}</p>}
               <p>{about}</p>
             </div>
-            <div>
+            <div className="flex gap-[10px]">
               <button
                 className="btn btn-primary mx-2"
                 onClick={() => reviewRequest("rejected", request._id)}
