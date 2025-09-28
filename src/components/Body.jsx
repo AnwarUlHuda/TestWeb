@@ -13,7 +13,7 @@ const Body = () => {
   const userData = useSelector((state) => state.user);
 
   useEffect(() => {
-    if(!userData)
+    if (!userData)
       fetchUser();
   }, []);
 
@@ -31,7 +31,7 @@ const Body = () => {
   return (
     <>
       <Navbar />
-      <Outlet/>
+      <Outlet />
       <Footer />
     </>
   )
